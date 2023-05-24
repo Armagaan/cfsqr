@@ -23,7 +23,7 @@ import torch
 #         g.ndata['h'] = h
 #         h = self.maxpool(g, h)  # pooling
 #         h = self.dense(h)
-#         h = torch.nn.functional.sigmoid(h)
+#         h = torch.sigmoid(h)
 #         return h
 
 class GCNGraph(torch.nn.Module):
@@ -50,7 +50,7 @@ class GCNGraph(torch.nn.Module):
         h = self.dense2(h)
         h = torch.nn.functional.relu(h)
         h = self.dense3(h)
-        h = torch.nn.functional.sigmoid(h)
+        h = torch.sigmoid(h)
         return h
 
 
@@ -99,7 +99,7 @@ class GCNNodeTreeCycles(torch.nn.Module):
         h = torch.nn.functional.relu(h)
         h = self.conv3(g, h, e_weight)
         if self.if_exp:  # if in the explanation mod, should add softmax layer
-            h = torch.nn.functional.sigmoid(h)
+            h = torch.sigmoid(h)
         g.ndata['h'] = h
         return g.ndata['h'][target_node]
 
